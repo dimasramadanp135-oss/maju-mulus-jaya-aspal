@@ -284,12 +284,64 @@
         }
 
         .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 20px;
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+        
+        .services-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .services-carousel-container {
+            position: relative;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: calc(50% - 10px);
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            background-color: var(--yellow);
+            color: var(--black);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .carousel-arrow:hover {
+            transform: translateY(-50%) scale(1.1);
+            background-color: #e0a800;
+        }
+
+        .carousel-arrow.prev { left: -15px; }
+        .carousel-arrow.next { right: -15px; }
+
+        .carousel-arrow svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         .service-card {
+            min-width: calc(33.333% - 14px);
+            flex-shrink: 0;
+            scroll-snap-align: start;
             background-color: var(--white);
             padding: 40px 30px;
             border-radius: 12px;
@@ -812,7 +864,7 @@
         @media (max-width: 992px) {
             .hero h1 { font-size: 2.8rem; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .service-card { min-width: calc(50% - 10px); }
             .about-grid, .contact-grid { grid-template-columns: 1fr; }
         }
 
@@ -835,7 +887,10 @@
             .nav-link { font-size: 1.2rem; }
             .hero h1 { font-size: 2.2rem; }
             .hero-btns { flex-direction: column; }
-            .services-grid { grid-template-columns: 1fr; }
+            .service-card { min-width: 85%; }
+            .carousel-arrow { width: 36px; height: 36px; }
+            .carousel-arrow.prev { left: -10px; }
+            .carousel-arrow.next { right: -10px; }
             .calc-form { grid-template-columns: 1fr; }
             .order-form .form-grid { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; text-align: center; }
@@ -869,7 +924,6 @@
     <section id="beranda" class="hero">
         <div class="container">
             <div class="hero-content fade-in">
-                <div class="hero-badge">⭐ Dipercaya 200+ Proyek</div>
                 <h1>Jasa Pengaspalan & <br><span>Pengecatan Profesional</span></h1>
                 <p>Melayani Jawa Barat, Jawa Tengah & Jawa Timur | Berpengalaman, Bergaransi, Harga Kompetitif</p>
                 <div class="hero-btns">
@@ -910,7 +964,11 @@
             <h2 class="section-title fade-in">Layanan Kami</h2>
             <p class="section-subtitle fade-in">Solusi pengaspalan dan pengecatan terbaik untuk berbagai kebutuhan Anda.</p>
             
-            <div class="services-grid">
+            <div class="services-carousel-container">
+                <button class="carousel-arrow prev" id="services-prev" aria-label="Previous">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <div class="services-grid" id="services-grid">
                 <!-- Service 1 -->
                 <div class="service-card fade-in">
                     <div class="service-icon">
@@ -968,6 +1026,10 @@
                     <p>Perbaikan cepat dan tepat untuk jalan berlubang atau retak.</p>
                 </div>
             </div>
+                <button class="carousel-arrow next" id="services-next" aria-label="Next">
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -982,28 +1044,35 @@
                     <div class="form-group">
                         <label for="calc-layanan">Jenis Layanan</label>
                         <select id="calc-layanan" class="form-control">
-                            <option value="aspal">Pengaspalan (Jalan/Parkiran/SPBU)</option>
+                            <option value="aspal">Pengaspalan</option>
                             <option value="cat">Pengecatan Lapangan</option>
                             <option value="tambal">Tambal Sulam</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="calc-luas-group">
                         <label for="calc-luas">Luas Area (m²)</label>
                         <input type="number" id="calc-luas" class="form-control" placeholder="Contoh: 250" min="1">
                     </div>
                 </div>
                 
-                <div class="calc-result">
-                    <h4>Estimasi Harga:</h4>
-                    <div class="price" id="calc-price">Rp 0</div>
+                <div id="calc-active-content">
+                    <div class="calc-result">
+                        <h4>Estimasi Harga:</h4>
+                        <div class="price" id="calc-price">Rp 0</div>
+                    </div>
+                    
+                    <p class="calc-note">
+                        Estimasi mulai dari Rp 70.000/m² — harga dapat berubah tergantung kondisi lapangan dan jenis pekerjaan. <br>Hubungi kami untuk penawaran resmi dan survei gratis.
+                    </p>
+                    
+                    <div style="text-align: center;">
+                        <a href="https://wa.me/6285289911799" target="_blank" class="btn btn-primary">Dapatkan Penawaran Resmi</a>
+                    </div>
                 </div>
-                
-                <p class="calc-note">
-                    Estimasi mulai dari Rp 70.000/m² — harga dapat berubah tergantung kondisi lapangan dan jenis pekerjaan. <br>Hubungi kami untuk penawaran resmi dan survei gratis.
-                </p>
-                
-                <div style="text-align: center;">
-                    <a href="https://wa.me/6285289911799" target="_blank" class="btn btn-primary">Dapatkan Penawaran Resmi</a>
+
+                <div id="calc-coming-soon" style="display: none; text-align: center; padding: 40px 0;">
+                    <h3 style="color: var(--yellow); margin-bottom: 15px;">Coming Soon</h3>
+                    <p style="color: #ddd;">Kalkulator untuk layanan ini sedang dalam tahap pengembangan.</p>
                 </div>
             </div>
         </div>
@@ -1242,7 +1311,7 @@
         <div class="container">
             <div class="footer-top fade-in">
                 <a href="#" class="footer-logo">
-                    <img src="logo.png" alt="Logo Maju Mulus Jaya Aspal" style="height:56px;width:auto;object-fit:contain;filter:brightness(0) invert(1);">
+                    <img src="logo.png" alt="Logo Maju Mulus Jaya Aspal" style="height:56px;width:auto;object-fit:contain;">
                     Maju Mulus Jaya Aspal
                 </a>
                 <p class="footer-tagline">"Solusi Pengaspalan Profesional untuk Jawa Barat, Jawa Tengah & Jawa Timur"</p>
@@ -1349,9 +1418,27 @@
         });
 
         // Calculator
+        const calcLayanan = document.getElementById('calc-layanan');
+        const calcLuasGroup = document.getElementById('calc-luas-group');
+        const calcActiveContent = document.getElementById('calc-active-content');
+        const calcComingSoon = document.getElementById('calc-coming-soon');
         const calcLuas = document.getElementById('calc-luas');
         const calcPrice = document.getElementById('calc-price');
         const hargaPerMeter = 70000;
+
+        calcLayanan.addEventListener('change', () => {
+            if(calcLayanan.value === 'aspal') {
+                calcLuasGroup.style.display = 'flex';
+                calcActiveContent.style.display = 'block';
+                calcComingSoon.style.display = 'none';
+            } else {
+                calcLuasGroup.style.display = 'none';
+                calcActiveContent.style.display = 'none';
+                calcComingSoon.style.display = 'block';
+            }
+            calcLuas.value = '';
+            calcPrice.innerText = 'Rp 0';
+        });
 
         calcLuas.addEventListener('input', () => {
             const luas = parseFloat(calcLuas.value);
@@ -1392,21 +1479,40 @@
             const keterangan = document.getElementById('order-keterangan').value;
             const pertanyaan = document.getElementById('order-pertanyaan').value;
             
-            let message = `Halo Maju Mulus Jaya Aspal! 👋\n\nSaya ingin menanyakan jasa pengaspalan/pengecatan untuk proyek saya. Berikut detail informasinya:\n\n━━━━━━━━━━━━━━━━━━━━━━\n📋 DATA PEMESAN\n━━━━━━━━━━━━━━━━━━━━━━\n👤 Nama         : ${nama}\n📱 No. WhatsApp : ${wa}\n\n━━━━━━━━━━━━━━━━━━━━━━\n🛠️ DETAIL PROYEK\n━━━━━━━━━━━━━━━━━━━━━━\n🔧 Jenis Layanan : ${layanan}\n📐 Luas Area     : ${luas} m²\n📍 Lokasi Proyek : ${lokasi}\n`;
+            let message = `Halo Maju Mulus Jaya Aspal!\n\nSaya ingin menanyakan jasa pengaspalan/pengecatan untuk proyek saya. Berikut detail informasinya:\n\n━━━━━━━━━━━━━━━━━━━━━━\nDATA PEMESAN\n━━━━━━━━━━━━━━━━━━━━━━\nNama         : ${nama}\nNo. WhatsApp : ${wa}\n\n━━━━━━━━━━━━━━━━━━━━━━\nDETAIL PROYEK\n━━━━━━━━━━━━━━━━━━━━━━\nJenis Layanan : ${layanan}\nLuas Area     : ${luas} m²\nLokasi Proyek : ${lokasi}\n`;
 
             if(keterangan.trim() !== '') {
-                message += `\n━━━━━━━━━━━━━━━━━━━━━━\n📝 KETERANGAN TAMBAHAN\n━━━━━━━━━━━━━━━━━━━━━━\n${keterangan}\n`;
+                message += `\n━━━━━━━━━━━━━━━━━━━━━━\nKETERANGAN TAMBAHAN\n━━━━━━━━━━━━━━━━━━━━━━\n${keterangan}\n`;
             }
 
             if(pertanyaan.trim() !== '') {
-                message += `\n━━━━━━━━━━━━━━━━━━━━━━\n❓ PERTANYAAN\n━━━━━━━━━━━━━━━━━━━━━━\n${pertanyaan}\n`;
+                message += `\n━━━━━━━━━━━━━━━━━━━━━━\nPERTANYAAN\n━━━━━━━━━━━━━━━━━━━━━━\n${pertanyaan}\n`;
             }
 
-            message += `\n━━━━━━━━━━━━━━━━━━━━━━\nMohon informasi lebih lanjut mengenai penawaran resmi dan jadwal survei. Terima kasih! 🙏`;
+            message += `\n━━━━━━━━━━━━━━━━━━━━━━\nMohon informasi lebih lanjut mengenai penawaran resmi dan jadwal survei. Terima kasih!`;
             
             const encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/6285289911799?text=${encodedMessage}`, '_blank');
         });
+
+        // Services Carousel Arrows
+        const servicesGrid = document.getElementById('services-grid');
+        const servicesPrev = document.getElementById('services-prev');
+        const servicesNext = document.getElementById('services-next');
+
+        if (servicesGrid && servicesPrev && servicesNext) {
+            servicesPrev.addEventListener('click', () => {
+                const card = servicesGrid.querySelector('.service-card');
+                const scrollAmount = card.offsetWidth + 20; // card width + gap
+                servicesGrid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+
+            servicesNext.addEventListener('click', () => {
+                const card = servicesGrid.querySelector('.service-card');
+                const scrollAmount = card.offsetWidth + 20; // card width + gap
+                servicesGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+        }
     </script>
 </body>
 </html>
