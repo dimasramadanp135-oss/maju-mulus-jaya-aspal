@@ -13,7 +13,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -231,8 +231,12 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-family: var(--font-heading);
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.2;
             margin-bottom: 20px;
+            color: var(--white);
         }
 
         .hero h1 span {
@@ -240,7 +244,7 @@
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 40px;
             color: #ccc;
         }
@@ -336,6 +340,16 @@
             stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round;
+        }
+
+        /* Desktop: arrows float left/right of the grid */
+        .services-nav { display: none; }
+
+        .carousel-arrow.prev { left: 0; }
+        .carousel-arrow.next { right: 0; }
+
+        .services-grid {
+            margin: 0 54px; /* make room for 44px arrows + 10px gap each side */
         }
 
         .service-card {
@@ -916,7 +930,7 @@
 
         /* Responsive */
         @media (max-width: 992px) {
-            .hero h1 { font-size: 2.8rem; }
+            .hero h1 { font-size: 2.5rem; letter-spacing: -0.5px; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .service-card { min-width: calc(50% - 10px); }
             .about-grid, .contact-grid { grid-template-columns: 1fr; }
@@ -940,12 +954,28 @@
             }
             .nav-menu.active { left: 0; }
             .nav-link { font-size: 1.2rem; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero-btns { flex-direction: column; }
-            .service-card { min-width: 85%; }
+            .hero { height: auto; min-height: unset; padding: 120px 20px 60px; }
+            .hero h1 { font-size: 1.4rem; line-height: 1.3; margin-bottom: 12px; }
+            .hero p { font-size: 0.9rem; margin-bottom: 24px; color: #bbb; }
+            .hero-btns { flex-direction: column; align-items: center; gap: 12px; }
+            .hero-btns .btn { width: auto; min-width: 200px; padding: 12px 24px; font-size: 0.95rem; }
+            .services-carousel-container { overflow: hidden; }
+            .services-grid {
+                flex-direction: row;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 0;
+                margin: 0 44px;
+                padding-bottom: 10px;
+            }
+            .service-card {
+                min-width: 100%;
+                width: 100%;
+                scroll-snap-align: start;
+            }
             .carousel-arrow { width: 36px; height: 36px; }
-            .carousel-arrow.prev { left: -10px; }
-            .carousel-arrow.next { right: -10px; }
+            .carousel-arrow.prev { left: 0; }
+            .carousel-arrow.next { right: 0; }
             .calc-form { grid-template-columns: 1fr; }
             .order-form .form-grid { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; text-align: center; }
@@ -954,6 +984,10 @@
             .portfolio-img { height: 120px; }
             .portfolio-info { padding: 10px; }
             .portfolio-info h4 { font-size: 0.85rem; }
+            .stats { padding: 30px 0; }
+            .stats-grid { gap: 16px; }
+            .stat-item h3 { font-size: 1.8rem; }
+            .stat-item p { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -983,11 +1017,11 @@
     <section id="beranda" class="hero">
         <div class="container">
             <div class="hero-content fade-in">
-                <h1>Jasa Pengaspalan & <br><span>Pengecatan Profesional</span></h1>
+                <h1>Jasa Pengaspalan & <span>Pengecatan Profesional</span></h1>
                 <p>Melayani Jawa Barat, Jawa Tengah & Jawa Timur | Berpengalaman, Bergaransi, Harga Kompetitif</p>
                 <div class="hero-btns">
                     <a href="#pesan" class="btn btn-primary">Pesan Sekarang</a>
-                    <a href="https://wa.me/6285289911799" target="_blank" class="btn btn-secondary">Konsultasi Gratis</a>
+                    <a href="https://wa.me/6285289911799?text=Halo%20Maju%20Mulus%20Jaya%20Aspal!%20Saya%20ingin%20konsultasi%20mengenai%20jasa%20pengaspalan.%0A%0A%5Bvia%20website%5D" target="_blank" class="btn btn-secondary">Konsultasi Gratis</a>
                 </div>
             </div>
         </div>
@@ -1022,7 +1056,6 @@
         <div class="container">
             <h2 class="section-title fade-in">Layanan Kami</h2>
             <p class="section-subtitle fade-in">Solusi pengaspalan dan pengecatan terbaik untuk berbagai kebutuhan Anda.</p>
-            
             <div class="services-carousel-container">
                 <button class="carousel-arrow prev" id="services-prev" aria-label="Previous">
                     <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -1065,7 +1098,7 @@
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
                     </div>
-                    <h3>Aspal Halaman Ruko & Toko</h3>
+                    <h3>Aspal Halaman Ruko &amp; Toko</h3>
                     <p>Tingkatkan nilai estetik dan kenyamanan akses pelanggan ke toko Anda.</p>
                 </div>
                 <!-- Service 6 -->
@@ -1084,7 +1117,7 @@
                     <h3>Tambal Sulam Jalan Rusak</h3>
                     <p>Perbaikan cepat dan tepat untuk jalan berlubang atau retak.</p>
                 </div>
-            </div>
+                </div>
                 <button class="carousel-arrow next" id="services-next" aria-label="Next">
                     <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                 </button>
@@ -1146,60 +1179,40 @@
         </div>
     </section>
 
-    <!-- Order Form -->
-    <section id="pesan" class="section order">
+    <!-- About Us -->
+    <section id="tentang" class="section about">
         <div class="container">
-            <h2 class="section-title fade-in">Pesan Sekarang</h2>
-            <p class="section-subtitle fade-in">Gratis Survei & Konsultasi untuk wilayah Jawa Barat, Jawa Tengah, dan Jawa Timur.</p>
-            
-            <div class="order-container fade-in">
-                <form id="order-form" class="order-form">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="order-nama">Nama Lengkap *</label>
-                            <input type="text" id="order-nama" class="form-control" required>
+            <div class="about-grid">
+                <div class="about-content fade-in">
+                    <h2>Tentang Maju Mulus Jaya Aspal</h2>
+                    <p>Maju Mulus Jaya Aspal adalah penyedia jasa konstruksi jalan dan pengaspalan terpercaya yang didirikan oleh <strong>Bapak Abdul Gofur</strong>. Kami berdedikasi untuk memberikan hasil pekerjaan terbaik yang awet, presisi, dan estetis.</p>
+                    <p>Dengan komitmen tinggi terhadap kualitas, kami telah dipercaya menangani ratusan proyek mulai dari jalan perumahan, area parkir komersial, lapangan sekolah, hingga instansi pemerintah.</p>
+                    
+                    <div class="about-points">
+                        <div class="about-point">
+                            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                            <div>
+                                <h4>Tim Berpengalaman</h4>
+                                <p>Lebih dari 10 tahun pengalaman di bidang aspal.</p>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="order-wa">Nomor WhatsApp *</label>
-                            <input type="tel" id="order-wa" class="form-control" required>
+                        <div class="about-point">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 9h-2V7h2v5zm0 4h-2v-2h2v2z"/></svg>
+                            <div>
+                                <h4>Material Berkualitas</h4>
+                                <p>Hanya menggunakan aspal standar spesifikasi terbaik.</p>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="order-layanan">Jenis Layanan *</label>
-                            <select id="order-layanan" class="form-control" required>
-                                <option value="" disabled selected>Pilih Layanan</option>
-                                <option value="Pengaspalan Jalan Perumahan">Pengaspalan Jalan Perumahan</option>
-                                <option value="Aspal Area Parkiran">Aspal Area Parkiran</option>
-                                <option value="Aspal Area SPBU">Aspal Area SPBU</option>
-                                <option value="Aspal Lapangan Sekolah">Aspal Lapangan Sekolah</option>
-                                <option value="Aspal Halaman Ruko & Toko">Aspal Halaman Ruko & Toko</option>
-                                <option value="Pengecatan Lapangan Sekolah">Pengecatan Lapangan Sekolah</option>
-                                <option value="Tambal Sulam Jalan Rusak">Tambal Sulam Jalan Rusak</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="order-luas">Luas Area (m²) *</label>
-                            <input type="number" id="order-luas" class="form-control" required>
-                        </div>
-                        <div class="form-group full">
-                            <label for="order-lokasi">Lokasi Proyek/Kota *</label>
-                            <input type="text" id="order-lokasi" class="form-control" required>
-                        </div>
-                        <div class="form-group full">
-                            <label for="order-keterangan">Keterangan Tambahan <span>(Opsional)</span></label>
-                            <textarea id="order-keterangan" class="form-control" rows="3"></textarea>
-                        </div>
-                        <div class="form-group full">
-                            <label for="order-pertanyaan">Pertanyaan <span>(Opsional)</span></label>
-                            <textarea id="order-pertanyaan" class="form-control" rows="3"></textarea>
+                        <div class="about-point">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <div>
+                                <h4>Garansi Kepuasan</h4>
+                                <p>Jaminan hasil memuaskan di setiap proyek pengerjaan.</p>
+                            </div>
                         </div>
                     </div>
-                    <div style="margin-top: 30px; text-align: center;">
-                        <button type="submit" class="btn btn-primary" style="width: 100%; max-width: 300px; font-size: 1.1rem; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-                            Kirim via WhatsApp 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                        </button>
-                    </div>
-                </form>
+                </div>
+
             </div>
         </div>
     </section>
@@ -1298,7 +1311,7 @@
                     </p>
                     
                     <div style="text-align: center;">
-                        <a href="https://wa.me/6285289911799" target="_blank" class="btn btn-primary">Dapatkan Penawaran Resmi</a>
+                        <a href="https://wa.me/6285289911799?text=Halo%20Maju%20Mulus%20Jaya%20Aspal!%20Saya%20ingin%20mendapatkan%20penawaran%20resmi%20untuk%20proyek%20saya.%0A%0A%5Bvia%20website%5D" target="_blank" class="btn btn-primary">Dapatkan Penawaran Resmi</a>
                     </div>
                 </div>
 
@@ -1306,44 +1319,6 @@
                     <h3 style="color: var(--yellow); margin-bottom: 15px;">Coming Soon</h3>
                     <p style="color: #ddd;">Kalkulator untuk layanan ini sedang dalam tahap pengembangan.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Us -->
-    <section id="tentang" class="section about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-content fade-in">
-                    <h2>Tentang Maju Mulus Jaya Aspal</h2>
-                    <p>Maju Mulus Jaya Aspal adalah penyedia jasa konstruksi jalan dan pengaspalan terpercaya yang didirikan oleh <strong>Bapak Abdul Gofur</strong>. Kami berdedikasi untuk memberikan hasil pekerjaan terbaik yang awet, presisi, dan estetis.</p>
-                    <p>Dengan komitmen tinggi terhadap kualitas, kami telah dipercaya menangani ratusan proyek mulai dari jalan perumahan, area parkir komersial, lapangan sekolah, hingga instansi pemerintah.</p>
-                    
-                    <div class="about-points">
-                        <div class="about-point">
-                            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-                            <div>
-                                <h4>Tim Berpengalaman</h4>
-                                <p>Lebih dari 10 tahun pengalaman di bidang aspal.</p>
-                            </div>
-                        </div>
-                        <div class="about-point">
-                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 9h-2V7h2v5zm0 4h-2v-2h2v2z"/></svg>
-                            <div>
-                                <h4>Material Berkualitas</h4>
-                                <p>Hanya menggunakan aspal standar spesifikasi terbaik.</p>
-                            </div>
-                        </div>
-                        <div class="about-point">
-                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            <div>
-                                <h4>Garansi Kepuasan</h4>
-                                <p>Jaminan hasil memuaskan di setiap proyek pengerjaan.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
@@ -1372,7 +1347,7 @@
                         </div>
                         <div>
                             <h4>WhatsApp / Telepon</h4>
-                            <a href="https://wa.me/6285289911799">0852-8991-1799</a>
+                            <a href="https://wa.me/6285289911799?text=Halo%20Maju%20Mulus%20Jaya%20Aspal!%0A%0A%5Bvia%20website%5D">0852-8991-1799</a>
                         </div>
                     </div>
                     
@@ -1404,6 +1379,64 @@
         </div>
     </section>
 
+    <!-- Order Form -->
+    <section id="pesan" class="section order">
+        <div class="container">
+            <h2 class="section-title fade-in">Pesan Sekarang</h2>
+            <p class="section-subtitle fade-in">Gratis Survei & Konsultasi untuk wilayah Jawa Barat, Jawa Tengah, dan Jawa Timur.</p>
+            
+            <div class="order-container fade-in">
+                <form id="order-form" class="order-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="order-nama">Nama Lengkap *</label>
+                            <input type="text" id="order-nama" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="order-wa">Nomor WhatsApp *</label>
+                            <input type="tel" id="order-wa" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="order-layanan">Jenis Layanan *</label>
+                            <select id="order-layanan" class="form-control" required>
+                                <option value="" disabled selected>Pilih Layanan</option>
+                                <option value="Pengaspalan Jalan Perumahan">Pengaspalan Jalan Perumahan</option>
+                                <option value="Aspal Area Parkiran">Aspal Area Parkiran</option>
+                                <option value="Aspal Area SPBU">Aspal Area SPBU</option>
+                                <option value="Aspal Lapangan Sekolah">Aspal Lapangan Sekolah</option>
+                                <option value="Aspal Halaman Ruko & Toko">Aspal Halaman Ruko & Toko</option>
+                                <option value="Pengecatan Lapangan Sekolah">Pengecatan Lapangan Sekolah</option>
+                                <option value="Tambal Sulam Jalan Rusak">Tambal Sulam Jalan Rusak</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="order-luas">Luas Area (m²) *</label>
+                            <input type="number" id="order-luas" class="form-control" required>
+                        </div>
+                        <div class="form-group full">
+                            <label for="order-lokasi">Lokasi Proyek/Kota *</label>
+                            <input type="text" id="order-lokasi" class="form-control" required>
+                        </div>
+                        <div class="form-group full">
+                            <label for="order-keterangan">Keterangan Tambahan <span>(Opsional)</span></label>
+                            <textarea id="order-keterangan" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="form-group full">
+                            <label for="order-pertanyaan">Pertanyaan <span>(Opsional)</span></label>
+                            <textarea id="order-pertanyaan" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div style="margin-top: 30px; text-align: center;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%; max-width: 300px; font-size: 1.1rem; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                            Kirim via WhatsApp 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -1429,7 +1462,7 @@
     </footer>
 
     <!-- Floating WA -->
-    <a href="https://wa.me/6285289911799" target="_blank" class="floating-wa">
+    <a href="https://wa.me/6285289911799?text=Halo%20Maju%20Mulus%20Jaya%20Aspal!%20Saya%20ingin%20bertanya%20seputar%20jasa%20pengaspalan.%0A%0A%5Bvia%20website%5D" target="_blank" class="floating-wa">
         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
             <path fill="white" d="M16 1C7.716 1 1 7.716 1 16c0 2.628.687 5.163 1.994 7.388L1.05 30.516a.999.999 0 0 0 1.226 1.226l7.13-1.945A14.94 14.94 0 0 0 16 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm0 28a12.94 12.94 0 0 1-6.557-1.782.999.999 0 0 0-.76-.1l-5.014 1.367 1.367-5.014a1 1 0 0 0-.1-.76A12.94 12.94 0 0 1 3 16C3 8.82 8.82 3 16 3s13 5.82 13 13-5.82 13-13 13zm7.406-9.677c-.405-.203-2.394-1.181-2.766-1.316-.371-.135-.641-.203-.911.203-.27.405-1.046 1.316-1.282 1.586-.236.27-.473.304-.878.101-.405-.203-1.71-.63-3.258-2.011-1.204-1.074-2.017-2.4-2.253-2.805-.236-.405-.025-.624.177-.826.182-.181.405-.473.608-.709.203-.236.27-.405.405-.675.135-.27.068-.506-.034-.709-.101-.203-.911-2.197-1.247-3.009-.329-.791-.663-.683-.911-.696-.236-.012-.506-.015-.777-.015s-.709.101-1.081.506c-.371.405-1.418 1.385-1.418 3.378s1.452 3.919 1.654 4.19c.203.27 2.859 4.366 6.928 6.12.968.418 1.723.667 2.312.854.972.309 1.857.265 2.556.161.779-.116 2.394-.979 2.731-1.924.337-.945.337-1.755.236-1.924-.101-.169-.371-.27-.776-.472z"/>
         </svg>
@@ -1587,7 +1620,7 @@
                 message += `\n━━━━━━━━━━━━━━━━━━━━━━\nPERTANYAAN\n━━━━━━━━━━━━━━━━━━━━━━\n${pertanyaan}\n`;
             }
 
-            message += `\n━━━━━━━━━━━━━━━━━━━━━━\nMohon informasi lebih lanjut mengenai penawaran resmi dan jadwal survei. Terima kasih!`;
+            message += `\n━━━━━━━━━━━━━━━━━━━━━━\nMohon informasi lebih lanjut mengenai penawaran resmi dan jadwal survei. Terima kasih!\n\n[via website]`;
             
             const encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/6285289911799?text=${encodedMessage}`, '_blank');
@@ -1614,3 +1647,4 @@
     </script>
 </body>
 </html>
+
