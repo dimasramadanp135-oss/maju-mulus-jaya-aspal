@@ -616,7 +616,7 @@
 
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 50px;
             align-items: center;
         }
@@ -860,12 +860,67 @@
         .delay-2 { transition-delay: 0.2s; }
         .delay-3 { transition-delay: 0.3s; }
 
+        /* Portfolio */
+        .portfolio {
+            background-color: var(--white);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .portfolio-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border: 1px solid #eee;
+        }
+        
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .portfolio-img {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .portfolio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-card:hover .portfolio-img img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-info {
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .portfolio-info h4 {
+            font-size: 1rem;
+            color: var(--black);
+            margin: 0;
+            font-weight: 600;
+        }
+
         /* Responsive */
         @media (max-width: 992px) {
             .hero h1 { font-size: 2.8rem; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .service-card { min-width: calc(50% - 10px); }
             .about-grid, .contact-grid { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
@@ -895,6 +950,10 @@
             .order-form .form-grid { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; text-align: center; }
             .order-container { padding: 30px 20px; }
+            .portfolio-grid { gap: 10px; }
+            .portfolio-img { height: 120px; }
+            .portfolio-info { padding: 10px; }
+            .portfolio-info h4 { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -1032,60 +1091,52 @@
             </div>
         </div>
     </section>
-
-    <!-- Calculator -->
-    <section id="kalkulator" class="section calculator">
+    <!-- Portfolio -->
+    <section id="portfolio" class="section portfolio">
         <div class="container">
-            <h2 class="section-title fade-in">Kalkulator Estimasi Harga</h2>
-            <p class="section-subtitle fade-in">Hitung perkiraan biaya pengaspalan untuk proyek Anda. (Min. 200 m² atau borongan untuk 50-100 m²)</p>
+            <h2 class="section-title fade-in">Portfolio Kami</h2>
+            <p class="section-subtitle fade-in" style="margin-bottom: 40px;">Beberapa hasil pekerjaan pengaspalan dan pengecatan yang telah kami selesaikan.</p>
             
-            <div class="calc-box fade-in">
-                <div class="calc-form">
-                    <div class="form-group">
-                        <label for="calc-layanan">Jenis Layanan</label>
-                        <select id="calc-layanan" class="form-control">
-                            <option value="aspal">Pengaspalan</option>
-                            <option value="cat">Pengecatan Lapangan</option>
-                            <option value="tambal">Tambal Sulam</option>
-                        </select>
+            <div class="portfolio-grid fade-in">
+                <div class="portfolio-card">
+                    <div class="portfolio-img">
+                        <img src="portfolio_1.jpg" alt="Proyek Jalan Komplek">
                     </div>
-                    <div class="form-group" id="calc-luas-group">
-                        <label for="calc-luas">Luas Area (m²)</label>
-                        <input type="number" id="calc-luas" class="form-control" placeholder="Contoh: 250" min="1">
+                    <div class="portfolio-info">
+                        <h4>Proyek Jalan Komplek Perumahan</h4>
                     </div>
                 </div>
-                
-                <div id="calc-active-content">
-                    <div class="calc-result">
-                        <h4>Estimasi Harga:</h4>
-                        <div class="price" id="calc-price">Rp 0</div>
+                <div class="portfolio-card delay-1">
+                    <div class="portfolio-img">
+                        <img src="portfolio_2.jpg" alt="Pengaspalan Area Parkir">
                     </div>
-                    
-                    <p class="calc-note">
-                        Estimasi mulai dari Rp 70.000/m² — harga dapat berubah tergantung kondisi lapangan dan jenis pekerjaan. <br>Hubungi kami untuk penawaran resmi dan survei gratis.
-                    </p>
-                    
-                    <div style="text-align: center;">
-                        <a href="https://wa.me/6285289911799" target="_blank" class="btn btn-primary">Dapatkan Penawaran Resmi</a>
+                    <div class="portfolio-info">
+                        <h4>Pengaspalan Area Parkir Modern</h4>
                     </div>
                 </div>
-
-                <div id="calc-coming-soon" style="display: none; text-align: center; padding: 40px 0;">
-                    <h3 style="color: var(--yellow); margin-bottom: 15px;">Coming Soon</h3>
-                    <p style="color: #ddd;">Kalkulator untuk layanan ini sedang dalam tahap pengembangan.</p>
+                <div class="portfolio-card delay-2">
+                    <div class="portfolio-img">
+                        <img src="portfolio_3.jpg" alt="Perbaikan Jalan Raya">
+                    </div>
+                    <div class="portfolio-info">
+                        <h4>Perbaikan & Tambal Sulam Jalan Raya</h4>
+                    </div>
+                </div>
+                <div class="portfolio-card delay-3">
+                    <div class="portfolio-img">
+                        <img src="portfolio_4.jpg" alt="Pengecatan Lapangan Olahraga">
+                    </div>
+                    <div class="portfolio-info">
+                        <h4>Pengecatan Lapangan Olahraga Sekolah</h4>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio & Testimonials (Coming Soon) -->
+    <!-- Testimonials (Coming Soon) -->
     <section class="section coming-soon">
         <div class="container">
-            <div class="coming-soon-box fade-in" style="margin-bottom: 40px;">
-                <h3>Portfolio Kami</h3>
-                <p>Portfolio kami segera hadir. Ingin jadi klien pertama yang kami tampilkan? Hubungi kami sekarang!</p>
-                <a href="#pesan" class="btn btn-primary">Hubungi Kami</a>
-            </div>
             
             <div class="coming-soon-box fade-in">
                 <h3>Testimoni Pelanggan</h3>
@@ -1143,7 +1194,10 @@
                         </div>
                     </div>
                     <div style="margin-top: 30px; text-align: center;">
-                        <button type="submit" class="btn btn-primary" style="width: 100%; max-width: 300px; font-size: 1.1rem;">Kirim via WhatsApp 🚀</button>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; max-width: 300px; font-size: 1.1rem; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                            Kirim via WhatsApp 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -1210,6 +1264,52 @@
         </div>
     </section>
 
+    <!-- Calculator -->
+    <section id="kalkulator" class="section calculator">
+        <div class="container">
+            <h3 class="fade-in" style="text-align: center; color: var(--orange); font-size: 1.5rem; margin-bottom: 10px; font-family: var(--font-heading);">Sudah tahu kebutuhanmu? Hitung estimasi biayanya sekarang</h3>
+            <h2 class="section-title fade-in" style="margin-top: 0;">Kalkulator Estimasi Harga</h2>
+            <p class="section-subtitle fade-in">Hitung perkiraan biaya pengaspalan untuk proyek Anda. (Min. 200 m² atau borongan untuk 50-100 m²)</p>
+            
+            <div class="calc-box fade-in">
+                <div class="calc-form">
+                    <div class="form-group">
+                        <label for="calc-layanan">Jenis Layanan</label>
+                        <select id="calc-layanan" class="form-control">
+                            <option value="aspal">Pengaspalan</option>
+                            <option value="cat">Pengecatan Lapangan</option>
+                            <option value="tambal">Tambal Sulam</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="calc-luas-group">
+                        <label for="calc-luas">Luas Area (m²)</label>
+                        <input type="number" id="calc-luas" class="form-control" placeholder="Contoh: 250" min="1">
+                    </div>
+                </div>
+                
+                <div id="calc-active-content">
+                    <div class="calc-result">
+                        <h4>Estimasi Harga:</h4>
+                        <div class="price" id="calc-price">Rp 0</div>
+                    </div>
+                    
+                    <p class="calc-note">
+                        Estimasi mulai dari Rp 70.000/m² — harga dapat berubah tergantung kondisi lapangan dan jenis pekerjaan. <br>Hubungi kami untuk penawaran resmi dan survei gratis.
+                    </p>
+                    
+                    <div style="text-align: center;">
+                        <a href="https://wa.me/6285289911799" target="_blank" class="btn btn-primary">Dapatkan Penawaran Resmi</a>
+                    </div>
+                </div>
+
+                <div id="calc-coming-soon" style="display: none; text-align: center; padding: 40px 0;">
+                    <h3 style="color: var(--yellow); margin-bottom: 15px;">Coming Soon</h3>
+                    <p style="color: #ddd;">Kalkulator untuk layanan ini sedang dalam tahap pengembangan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Us -->
     <section id="tentang" class="section about">
         <div class="container">
@@ -1243,9 +1343,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="about-image fade-in delay-1">
-                    <img src="https://images.unsplash.com/photo-1541888086425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tentang Maju Mulus Jaya Aspal" style="border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-                </div>
+
             </div>
         </div>
     </section>
@@ -1264,7 +1362,7 @@
                         </div>
                         <div>
                             <h4>Alamat</h4>
-                            <p>Jalan Margalaksana Cirata, Kec. Cipeundeuy, Kab. Bandung Barat</p>
+                            <p>Kec. Cipeundeuy, Kab. Bandung Barat</p>
                         </div>
                     </div>
                     
@@ -1300,7 +1398,7 @@
                 </div>
                 
                 <div class="map-container fade-in delay-1">
-                    <iframe src="https://maps.google.com/maps?q=Cirata+Cipendeuy+Bandung+Barat&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>
+                    <iframe src="https://maps.google.com/maps?q=Cipeundeuy+Bandung+Barat&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>
                 </div>
             </div>
         </div>
