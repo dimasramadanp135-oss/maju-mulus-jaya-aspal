@@ -4,11 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maju Mulus Jaya Aspal – Jasa Pengaspalan & Pengecatan Profesional Jawa Barat</title>
-    <meta name="description" content="Jasa pengaspalan profesional melayani Jawa Barat, Jawa Tengah, Jawa Timur. Pengaspalan jalan, parkiran, lapangan sekolah, SPBU. Hubungi Abdul Gofur – Maju Mulus Jaya Aspal.">
-    <meta name="keywords" content="jasa pengaspalan bandung, aspal jalan perumahan, pengaspalan parkiran, jasa aspal jawa barat, maju mulus jaya aspal">
-    <meta property="og:title" content="Maju Mulus Jaya Aspal – Jasa Pengaspalan Profesional">
-    <meta property="og:description" content="Jasa pengaspalan dan pengecatan profesional melayani 3 provinsi di Jawa.">
+    <meta name="description" content="Jasa pengaspalan jalan profesional di Jawa Barat, Jawa Tengah & Jawa Timur. Berpengalaman, bergaransi, harga kompetitif. Survei gratis, hubungi kami sekarang.">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Maju Mulus Jaya Aspal - Jasa Pengaspalan & Pengecatan Profesional">
+    <meta property="og:description" content="Jasa pengaspalan jalan profesional di Jawa Barat, Jawa Tengah & Jawa Timur. Berpengalaman, bergaransi, harga kompetitif. Survei gratis, hubungi kami sekarang.">
+    <meta property="og:image" content="/logo.png">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://majumulusjayaaspal.com">
+
+    <!-- LocalBusiness Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Maju Mulus Jaya Aspal",
+      "description": "Jasa pengaspalan jalan dan pengecatan profesional di Jawa Barat, Jawa Tengah & Jawa Timur",
+      "telephone": "+6285289911799",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cipeundeuy",
+        "addressRegion": "Bandung Barat",
+        "addressCountry": "ID"
+      },
+      "areaServed": ["Jawa Barat", "Jawa Tengah", "Jawa Timur"],
+      "serviceType": ["Pengaspalan Jalan", "Pengecatan Lapangan", "Tambal Sulam Jalan"],
+      "sameAs": [
+        "https://www.instagram.com/maju_mulus_jaya_aspal",
+        "https://www.tiktok.com/@majumulusjayaaspal"
+      ]
+    }
+    </script>
+
+    <!-- Google Search Console verification tag here -->
+    <!-- Google Analytics (GA4) tag here -->
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,6 +57,13 @@
             
             --hero-overlay: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.9));
             --hero-text: #1a1a1a;
+
+            --footer-bg: #f8f9fa;
+            --footer-text: #1a1a1a;
+            --footer-text-secondary: #666666;
+            --footer-border: #eeeeee;
+            
+            --accent: #FF6B00;
 
             /* Brand colors (Stay same) */
             --yellow: #FFC107;
@@ -50,6 +86,13 @@
             
             --hero-overlay: linear-gradient(rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.9));
             --hero-text: #ffffff;
+
+            --footer-bg: #111111;
+            --footer-text: #ffffff;
+            --footer-text-secondary: #888888;
+            --footer-border: #333333;
+            
+            --accent: #FFC107;
         }
 
         * {
@@ -320,15 +363,15 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 5px;
+            padding: 4px;
             border-radius: 50px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 15px;
+            justify-content: space-between;
             position: relative;
-            width: 100px;
-            height: 44px;
+            width: 84px;
+            height: 42px;
             transition: all 0.3s ease;
         }
 
@@ -338,52 +381,42 @@
         }
 
         .theme-toggle span {
-            flex: 1;
+            width: 34px;
+            height: 34px;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1;
             color: var(--hero-text);
             opacity: 0.5;
-            transition: opacity 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .theme-toggle .toggle-circle {
             position: absolute;
-            left: 5px;
+            left: 4px;
             width: 34px;
             height: 34px;
-            background-color: var(--white);
+            background-color: var(--hero-text);
             border-radius: 50%;
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 0;
         }
 
         [data-theme="light"] .theme-toggle .toggle-circle {
-            transform: translateX(56px);
+            transform: translateX(42px);
         }
 
-        [data-theme="dark"] .theme-toggle .moon { opacity: 1; color: var(--black); }
-        [data-theme="light"] .theme-toggle .sun { opacity: 1; color: var(--black); }
-        
-        /* Ensure sun/moon icons are visible on circle */
-        .theme-toggle .sun svg, .theme-toggle .moon svg {
-            width: 18px;
-            height: 18px;
-            stroke-width: 2.5;
-        }
-
-        .theme-toggle .toggle-circle {
-            background-color: var(--hero-text);
-        }
-        
-        .theme-toggle .sun, .theme-toggle .moon {
-            transition: all 0.3s ease;
-        }
-        
         /* State when active (on the circle) */
         [data-theme="dark"] .moon { opacity: 1 !important; color: var(--black) !important; }
         [data-theme="light"] .sun { opacity: 1 !important; color: var(--white) !important; }
+        
+        .theme-toggle .sun svg, .theme-toggle .moon svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 2.5;
+        }
 
         /* Stats */
         .stats {
@@ -421,8 +454,11 @@
             display: flex;
             gap: 20px;
             overflow-x: auto;
+            overflow-y: hidden; /* Memastikan tidak ada scroll atas bawah */
             scroll-snap-type: x mandatory;
-            padding-bottom: 20px;
+            padding-top: 15px; /* Ruang untuk efek hover translateY */
+            padding-bottom: 25px;
+            margin: 0 54px; /* Space for arrows */
             -ms-overflow-style: none; /* IE and Edge */
             scrollbar-width: none; /* Firefox */
         }
@@ -478,9 +514,6 @@
         .carousel-arrow.prev { left: 0; }
         .carousel-arrow.next { right: 0; }
 
-        .services-grid {
-            margin: 0 54px; /* make room for 44px arrows + 10px gap each side */
-        }
 
         .service-card {
             min-width: calc(33.333% - 14px);
@@ -796,7 +829,7 @@
             flex-shrink: 0;
         }
 
-        .about-point div h4 {
+        .about-point div h3 {
             margin-bottom: 5px;
         }
 
@@ -835,12 +868,13 @@
         .contact-icon {
             width: 50px;
             height: 50px;
-            background-color: rgba(255, 107, 0, 0.1);
+            background-color: rgba(255, 193, 7, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            border: 1px solid rgba(255, 193, 7, 0.2);
         }
 
         .contact-icon svg {
@@ -849,17 +883,19 @@
             fill: var(--accent);
         }
 
-        .contact-item h4 {
+        .contact-item h3 {
             margin-bottom: 5px;
         }
 
         .contact-item p, .contact-item a {
-            color: var(--text-secondary);
+            color: var(--text-primary);
+            opacity: 0.8;
             transition: color 0.3s;
         }
 
         .contact-item a:hover {
             color: var(--accent);
+            opacity: 1;
         }
 
         .map-container {
@@ -872,9 +908,10 @@
 
         /* Footer */
         .footer {
-            background-color: #111;
-            color: var(--white);
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
             padding: 60px 0 20px;
+            border-top: 1px solid var(--footer-border);
         }
 
         .footer-top {
@@ -889,7 +926,7 @@
             font-family: var(--font-heading);
             font-size: 1.5rem;
             font-weight: 800;
-            color: var(--white);
+            color: var(--footer-text);
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -903,7 +940,7 @@
         }
 
         .footer-tagline {
-            color: #888;
+            color: var(--footer-text-secondary);
             margin-bottom: 30px;
             max-width: 400px;
         }
@@ -916,7 +953,7 @@
         }
 
         .footer-links a {
-            color: #ccc;
+            color: var(--footer-text-secondary);
             transition: color 0.3s;
         }
 
@@ -925,13 +962,13 @@
         }
 
         .footer-bottom {
-            border-top: 1px solid #333;
+            border-top: 1px solid var(--footer-border);
             padding-top: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 0.9rem;
-            color: #888;
+            color: var(--footer-text-secondary);
             flex-wrap: wrap;
             gap: 10px;
         }
@@ -1015,8 +1052,8 @@
         
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
         }
         
         .portfolio-card {
@@ -1035,7 +1072,7 @@
         
         .portfolio-img {
             width: 100%;
-            height: 200px;
+            height: 350px;
             overflow: hidden;
         }
         
@@ -1055,7 +1092,7 @@
             text-align: center;
         }
         
-        .portfolio-info h4 {
+        .portfolio-info h3 {
             font-size: 1rem;
             color: var(--text-primary);
             margin: 0;
@@ -1068,7 +1105,7 @@
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .service-card { min-width: calc(50% - 10px); }
             .about-grid, .contact-grid { grid-template-columns: 1fr; }
-            .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .portfolio-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
@@ -1098,10 +1135,12 @@
             .services-grid {
                 flex-direction: row;
                 overflow-x: auto;
+                overflow-y: hidden;
                 scroll-snap-type: x mandatory;
                 gap: 0;
                 margin: 0 44px;
-                padding-bottom: 10px;
+                padding-top: 10px;
+                padding-bottom: 15px;
             }
             .service-card {
                 min-width: 100%;
@@ -1115,8 +1154,8 @@
             .order-form .form-grid { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; text-align: center; }
             .order-container { padding: 30px 20px; }
-            .portfolio-grid { gap: 10px; }
-            .portfolio-img { height: 120px; }
+            .portfolio-grid { gap: 20px; }
+            .portfolio-img { height: 250px; }
             .portfolio-info { padding: 10px; }
             .portfolio-info h4 { font-size: 0.85rem; }
             .stats { padding: 30px 0; }
@@ -1153,7 +1192,7 @@
         <div class="container">
             <div class="hero-content fade-in">
                 <div class="hero-logo">
-                    <img src="logo.png" alt="Logo Maju Mulus">
+                    <img src="logo.png" alt="Logo Maju Mulus Jaya Aspal">
                 </div>
                 <h1>Jasa Pengaspalan & <span>Pengecatan Profesional</span></h1>
                 <p>Melayani Jawa Barat, Jawa Tengah & Jawa Timur | Berpengalaman, Bergaransi, Harga Kompetitif</p>
@@ -1283,34 +1322,34 @@
             <div class="portfolio-grid fade-in">
                 <div class="portfolio-card">
                     <div class="portfolio-img">
-                        <img src="portfolio_1.jpg" alt="Proyek Jalan Komplek">
+                        <img src="portfolio_1.jpg" alt="pengaspalan jalan komplek perumahan Bandung Barat">
                     </div>
                     <div class="portfolio-info">
-                        <h4>Proyek Jalan Komplek Perumahan</h4>
+                        <h3>Proyek Jalan Komplek Perumahan</h3>
                     </div>
                 </div>
                 <div class="portfolio-card delay-1">
                     <div class="portfolio-img">
-                        <img src="portfolio_2.jpg" alt="Pengaspalan Area Parkir">
+                        <img src="portfolio_2.jpg" alt="pengaspalan area parkir modern Jawa Barat">
                     </div>
                     <div class="portfolio-info">
-                        <h4>Pengaspalan Area Parkir Modern</h4>
+                        <h3>Pengaspalan Area Parkir Modern</h3>
                     </div>
                 </div>
                 <div class="portfolio-card delay-2">
                     <div class="portfolio-img">
-                        <img src="portfolio_3.jpg" alt="Perbaikan Jalan Raya">
+                        <img src="portfolio_3.jpg" alt="perbaikan tambal sulam jalan raya Jawa Barat">
                     </div>
                     <div class="portfolio-info">
-                        <h4>Perbaikan & Tambal Sulam Jalan Raya</h4>
+                        <h3>Perbaikan & Tambal Sulam Jalan Raya</h3>
                     </div>
                 </div>
                 <div class="portfolio-card delay-3">
                     <div class="portfolio-img">
-                        <img src="portfolio_4.jpg" alt="Pengecatan Lapangan Olahraga">
+                        <img src="portfolio_4.jpg" alt="pengecatan lapangan olahraga sekolah Jawa Barat">
                     </div>
                     <div class="portfolio-info">
-                        <h4>Pengecatan Lapangan Olahraga Sekolah</h4>
+                        <h3>Pengecatan Lapangan Olahraga Sekolah</h3>
                     </div>
                 </div>
             </div>
@@ -1342,21 +1381,21 @@
                         <div class="about-point">
                             <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
                             <div>
-                                <h4>Tim Berpengalaman</h4>
+                                <h3>Tim Berpengalaman</h3>
                                 <p>Lebih dari 10 tahun pengalaman di bidang aspal.</p>
                             </div>
                         </div>
                         <div class="about-point">
                             <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 9h-2V7h2v5zm0 4h-2v-2h2v2z"/></svg>
                             <div>
-                                <h4>Material Berkualitas</h4>
+                                <h3>Material Berkualitas</h3>
                                 <p>Hanya menggunakan aspal standar spesifikasi terbaik.</p>
                             </div>
                         </div>
                         <div class="about-point">
                             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                             <div>
-                                <h4>Garansi Kepuasan</h4>
+                                <h3>Garansi Kepuasan</h3>
                                 <p>Jaminan hasil memuaskan di setiap proyek pengerjaan.</p>
                             </div>
                         </div>
@@ -1486,7 +1525,7 @@
                             <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         </div>
                         <div>
-                            <h4>Alamat</h4>
+                            <h3>Alamat</h3>
                             <p>Kec. Cipeundeuy, Kab. Bandung Barat</p>
                         </div>
                     </div>
@@ -1496,7 +1535,7 @@
                             <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
                         </div>
                         <div>
-                            <h4>WhatsApp / Telepon</h4>
+                            <h3>WhatsApp / Telepon</h3>
                             <a href="https://wa.me/6285289911799?text=Halo%20Maju%20Mulus%20Jaya%20Aspal!%0A%0A%5Bvia%20website%5D">0852-8991-1799</a>
                         </div>
                     </div>
@@ -1506,7 +1545,7 @@
                             <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
                         </div>
                         <div>
-                            <h4>Instagram</h4>
+                            <h3>Instagram</h3>
                             <a href="https://www.instagram.com/maju_mulus_jaya_aspal" target="_blank">@maju_mulus_jaya_aspal</a>
                         </div>
                     </div>
@@ -1516,7 +1555,7 @@
                             <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
                         </div>
                         <div>
-                            <h4>TikTok</h4>
+                            <h3>TikTok</h3>
                             <a href="https://www.tiktok.com/@majumulusjayaaspal" target="_blank">@majumulusjayaaspal</a>
                         </div>
                     </div>
