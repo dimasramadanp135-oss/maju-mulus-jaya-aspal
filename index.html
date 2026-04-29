@@ -143,6 +143,10 @@
         img {
             max-width: 100%;
             height: auto;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         .container {
@@ -302,7 +306,7 @@
         .hero {
             height: 100vh;
             min-height: 600px;
-            background-image: var(--hero-overlay), url('aspalbackground.jpg');
+            background-image: var(--hero-overlay), url('aspalbackground.png');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -1159,13 +1163,31 @@
             background-color: var(--bg-primary);
         }
 
+        .portfolio-carousel-container {
+            position: relative;
+        }
+
         .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            padding-top: 15px;
+            padding-bottom: 25px;
+            margin: 0 54px;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .portfolio-grid::-webkit-scrollbar {
+            display: none;
         }
 
         .portfolio-card {
+            min-width: calc(45%);
+            flex-shrink: 0;
+            scroll-snap-align: start;
             background-color: var(--bg-card);
             border-radius: 12px;
             overflow: hidden;
@@ -1228,8 +1250,8 @@
                 grid-template-columns: 1fr;
             }
 
-            .portfolio-grid {
-                grid-template-columns: 1fr;
+            .portfolio-card {
+                min-width: calc(60%);
             }
         }
 
@@ -1447,12 +1469,28 @@
                 padding: 30px 20px;
             }
 
+            .portfolio-carousel-container {
+                overflow: hidden;
+            }
+
+            .portfolio-carousel-container .carousel-arrow {
+                display: none;
+            }
+
             .portfolio-grid {
-                gap: 20px;
+                flex-direction: row;
+                margin: 0;
+                padding: 0 20px;
+                gap: 15px;
+            }
+
+            .portfolio-card {
+                min-width: calc(100% - 0px);
+                scroll-snap-align: center;
             }
 
             .portfolio-img {
-                height: 250px;
+                height: 300px;
             }
 
             .portfolio-info {
@@ -1681,39 +1719,76 @@
             <p class="section-subtitle fade-in" style="margin-bottom: 40px;">Beberapa hasil pekerjaan pengaspalan dan
                 pengecatan yang telah kami selesaikan.</p>
 
-            <div class="portfolio-grid fade-in">
-                <div class="portfolio-card">
-                    <div class="portfolio-img">
-                        <img src="portfolio_1.jpg" alt="pengaspalan jalan komplek perumahan Bandung Barat">
+            <div class="portfolio-carousel-container fade-in">
+                <button class="carousel-arrow prev" id="portfolio-prev" aria-label="Previous">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div class="portfolio-grid" id="portfolio-grid">
+                    <div class="portfolio-card">
+                        <div class="portfolio-img">
+                            <img src="portfolio_1.png" alt="pengaspalan jalan komplek perumahan Bandung Barat">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Proyek Jalan Komplek Perumahan</h3>
+                        </div>
                     </div>
-                    <div class="portfolio-info">
-                        <h3>Proyek Jalan Komplek Perumahan</h3>
+                    <div class="portfolio-card delay-1">
+                        <div class="portfolio-img">
+                            <img src="portfolio_2.png" alt="pengaspalan area SPBU Jawa Barat">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Pengaspalan Area SPBU</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-card delay-2">
+                        <div class="portfolio-img">
+                            <img src="portfolio_3.png" alt="perbaikan tambal sulam jalan raya Jawa Barat">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Perbaikan & Tambal Sulam Jalan Raya</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-card delay-3">
+                        <div class="portfolio-img">
+                            <img src="portfolio_4.png" alt="pengecatan lapangan olahraga sekolah Jawa Barat">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Pengecatan Lapangan Olahraga Sekolah</h3>
+                        </div>
+                    </div>
+                    <!-- Proyek Baru -->
+                    <div class="portfolio-card">
+                        <div class="portfolio-img">
+                            <img src="portfolio_5.png" alt="aspal halaman kantor profesional jawa barat">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Aspal Halaman Kantor</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-card delay-1">
+                        <div class="portfolio-img">
+                            <img src="portfolio_6.png" alt="aspal halaman kantor profesional jawa barat">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Aspal Halaman Kantor</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-card delay-2">
+                        <div class="portfolio-img">
+                            <img src="portfolio_7.png" alt="aspal halaman kantor profesional jawa barat">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Aspal Halaman Kantor</h3>
+                        </div>
                     </div>
                 </div>
-                <div class="portfolio-card delay-1">
-                    <div class="portfolio-img">
-                        <img src="portfolio_2.jpg" alt="pengaspalan area parkir modern Jawa Barat">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Pengaspalan Area Parkir Modern</h3>
-                    </div>
-                </div>
-                <div class="portfolio-card delay-2">
-                    <div class="portfolio-img">
-                        <img src="portfolio_3.jpg" alt="perbaikan tambal sulam jalan raya Jawa Barat">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Perbaikan & Tambal Sulam Jalan Raya</h3>
-                    </div>
-                </div>
-                <div class="portfolio-card delay-3">
-                    <div class="portfolio-img">
-                        <img src="portfolio_4.jpg" alt="pengecatan lapangan olahraga sekolah Jawa Barat">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Pengecatan Lapangan Olahraga Sekolah</h3>
-                    </div>
-                </div>
+                <button class="carousel-arrow next" id="portfolio-next" aria-label="Next">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
             </div>
         </div>
     </section>
@@ -1751,7 +1826,7 @@
                             </svg>
                             <div>
                                 <h3>Tim Berpengalaman</h3>
-                                <p>Lebih dari 10 tahun pengalaman di bidang aspal.</p>
+                                <p>Lebih dari 10 tahun berpengalaman di bidang pengaspalan.</p>
                             </div>
                         </div>
                         <div class="about-point">
@@ -1761,7 +1836,7 @@
                             </svg>
                             <div>
                                 <h3>Material Berkualitas</h3>
-                                <p>Hanya menggunakan aspal standar spesifikasi terbaik.</p>
+                                <p>Menggunakan aspal hotmix berkualitas dari pabrik AMP.</p>
                             </div>
                         </div>
                         <div class="about-point">
@@ -2308,6 +2383,39 @@
                 servicesGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
             });
         }
+
+        // Portfolio Carousel Arrows
+        const portfolioGrid = document.getElementById('portfolio-grid');
+        const portfolioPrev = document.getElementById('portfolio-prev');
+        const portfolioNext = document.getElementById('portfolio-next');
+
+        if (portfolioGrid && portfolioPrev && portfolioNext) {
+            portfolioPrev.addEventListener('click', () => {
+                const card = portfolioGrid.querySelector('.portfolio-card');
+                const scrollAmount = card.offsetWidth + 20; // card width + gap
+                portfolioGrid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+
+            portfolioNext.addEventListener('click', () => {
+                const card = portfolioGrid.querySelector('.portfolio-card');
+                const scrollAmount = card.offsetWidth + 20; // card width + gap
+                portfolioGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+        }
+
+        // Image Protection
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                alert('Foto ini adalah hak milik Maju Mulus Jaya Aspal.');
+            }
+        });
+
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
     </script>
 </body>
 
